@@ -1,0 +1,29 @@
+{
+  "name": "walter-praksa",
+  "version": "1.0.0",
+  "description": "Walter praksa projekat",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamzapenjo/walter-praksa.git"
+  },
+  "author": "Hamza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamzapenjo/walter-praksa/issues"
+  },
+  "homepage": "https://github.com/hamzapenjo/walter-praksa#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
