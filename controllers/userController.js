@@ -1,7 +1,6 @@
 const { response } = require('express')
 const User = require('../models/user')
 
-// prikaz svih user-a
 const index = (req, res, next) => {
     User.find()
     .then(response => {
@@ -16,7 +15,6 @@ const index = (req, res, next) => {
     })
 }
 
-// prikaz jednog user-a
 const show = (req, res, next) => {
     let userID = req.body.userID
     User.findById(userID)
@@ -32,7 +30,6 @@ const show = (req, res, next) => {
     })
 }
 
-// novi user
 const store = (req, res, next) => {
     let user = new User({
         ime: req.body.ime,
@@ -54,7 +51,6 @@ const store = (req, res, next) => {
     })
 }
 
-// update user-a
 const update = (req, res, next) => {
     let userID = req.body.userID
     let updateUser = {
@@ -76,7 +72,6 @@ const update = (req, res, next) => {
     })
 }
 
-// brisanje user-a
 const destroy = (req, res, next) => {
     let userID = req.body.userID
     User.findByIdAndDelete(userID)
