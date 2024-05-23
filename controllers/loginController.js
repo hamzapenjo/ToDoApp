@@ -1,13 +1,11 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const login = async (req, res, next) => {
     const { username, sifra } = req.body;
-
-    // Validate input data
-    if (!username || !sifra) {
-        return res.status(400).json({ message: "Username and password are required" });
-    }
 
     try {
         // Find user by username
@@ -15,17 +13,38 @@ const login = async (req, res, next) => {
 
         // Check if user exists
         if (!user) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            return res.status(401).json({ message: 'Authentication failed: Invalid credentials' });
         }
 
         // Check if password is correct
         const isPasswordValid = await bcrypt.compare(sifra, user.sifra);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            return res.status(401).json({ message: 'Authentication failed: Invalid credentials' });
         }
 
-        // If username and password are correct, user is logged in
-        res.status(200).json({ message: "Login successful", user });
+        // Generate JWT token
+        const token = jwt.sign(
+            {
+                _id: user._id,
+                username: user.username,
+                role: user.role
+            },
+            JWT_SECRET,
+            {
+                expiresIn: '1h'
+            }
+        );
+
+        // Respond with token
+        res.status(200).json({
+            message: 'Login successful',
+            token: token,
+            user: {
+                _id: user._id,
+                username: user.username,
+                role: user.role
+            }
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
