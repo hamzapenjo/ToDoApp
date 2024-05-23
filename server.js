@@ -8,12 +8,8 @@ const userRoutes = require('./routes/user');
 const registrationRoutes = require('./routes/registration');
 const companyRoutes = require('./routes/company');
 const loginRoutes = require('./routes/login');
-
-mongoose.connect('mongodb://localhost:27017/walterdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false 
-});
+const noteRoutes = require('./routes/note');
+mongoose.connect('mongodb://localhost:27017/walterdb')
 const db = mongoose.connection;
 db.on('error', (err) => {
     console.log(err);
@@ -34,8 +30,7 @@ app.use('/api/user', userRoutes);
 app.use('/auth', registrationRoutes);
 app.use('/api/company', companyRoutes);
 app.use('/auth', loginRoutes);
-app.use('/api/note', noteRoute);
-
+app.use('/api/note', noteRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
