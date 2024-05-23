@@ -6,7 +6,7 @@ const noteSchema = new Schema({
     content: { type: String, required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     company_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', required: true },
-    token: { type: String, required: true } // Ensure token field is defined correctly
+    token: { type: String, required: true }
 }, { timestamps: true });
 
 const Note = mongoose.model('Note', noteSchema);
