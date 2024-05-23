@@ -5,8 +5,6 @@ const Note = require('../models/note');
 const addNote = async (req, res) => {
   // Validate request body
   if (!validationResult(req).isEmpty()) return res.json(validationResult(req));
-
-  // Extract note data from request body
   let newNote = req.body;
 
   // Append user and company_id to newNote from userData in request
@@ -28,7 +26,6 @@ const addNote = async (req, res) => {
 
 // Edit an existing note by ID
 const editNote = async (req, res) => {
-  // Validate request body
   if (!validationResult(req).isEmpty()) return res.json(validationResult(req));
 
   // Extract note ID from URL parameters
@@ -49,7 +46,6 @@ const editNote = async (req, res) => {
 
 // Delete a note by ID
 const deleteNote = async (req, res) => {
-  // Extract note ID from URL parameters
   const id = req.params.title;
 
   // Delete the note from the database
@@ -65,7 +61,6 @@ const deleteNote = async (req, res) => {
 
 // Get a note by ID
 const getNote = async (req, res) => {
-  // Extract note ID from URL parameters
   const id = req.params.title;
 
   // Find the note in the database by ID
@@ -81,7 +76,6 @@ const getNote = async (req, res) => {
 
 // Get all notes for a specific user
 const getAllNotes = async (req, res) => {
-  // Extract user ID from userData in request
   const id_usera = req.userData._id;
 
   // Find all notes belonging to the user
@@ -97,7 +91,6 @@ const getAllNotes = async (req, res) => {
 
 // Get all notes for a specific company
 const getAllNotesCompany = async (req, res) => {
-  // Extract company ID from userData in request
   const company_id = req.userData.company_id;
 
   // Find all notes belonging to the company and populate user details

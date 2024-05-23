@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: { type: String, required: true, unique: true },
     sifra: { type: String, required: true },
     company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company', required: true },
-    token: { type: String, required: true } // Ensure token field is defined correctly
+    token: { type: String, required: true }
 });
 
 const User = mongoose.model('User', userSchema);
